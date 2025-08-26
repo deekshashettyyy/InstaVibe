@@ -28,7 +28,8 @@ let obj = multer({storage});
     let db = client.db("insta");
     let collec = db.collection("posts");
 
-// Routes 
+
+// CREATE POST
 app.post("/upload", obj.single("file") , (req,res)=>{
 
     let dataObj = {
@@ -45,31 +46,43 @@ app.post("/upload", obj.single("file") , (req,res)=>{
     .catch( (error)=> res.send(error));
 });
 
+
+// FETCH POST
 app.get("/show" , (req,res)=>{
 
-    collec.find().toArray()
+    let username = req.query.username;
+    let searchByUser = username? {username} : {} ;
+
+    collec.find(searchByUser).toArray()
     .then((result)=> res.json(result))
     .catch((err) => res.send(err));
 });
 
-app.delete("/delete/:id", (req,res)=>{
 
-    const id = req.params.id; // string id
-    let objID = new ObjectId(id); //converting string to obj
+// DELETE POST
+app.delete("/delete/:id", async (req,res)=>{
+    try{
+        const id = req.params.id; // string id
+        let _id = new ObjectId(id); //converting string to obj
 
-    collec.findOne({"_id": objID})
-    .then((obj)=>{
-        fs.promises.unlink(`uploadsFolder/${obj.file_name}`)   //delete from storage
-        return collec.deleteOne({"_id": objID})                // delete from mongo
-    })
-    .then( (result) => res.send(result))
-    .catch( (err) => res.send(err));
+        const obj = await collec.findOne({_id}) ;
+        if (!obj) 
+        {
+            return res.send("File not found");
+        }
+       
+        const filepath = path.join(__dirname , "uploadsFolder" , obj.file_name);
+        await fs.promises.unlink(filepath)             //delete from storage   
 
+        const result = await collec.deleteOne({_id})    // delete from mongo
+        res.send(result);
 
+    }
+    catch(err)
+    {
+        res.send(err);
+    }
 });
 
-
-
 app.listen(3000, ()=>console.log("express is live"));
-
 
