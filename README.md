@@ -65,7 +65,7 @@ npm run dev
 ## Deployment 🌐
 
 - **Backend:** Hosted on Render  
-- **Frontend:** Hosted on Firebase
+- **Frontend:** Hosted on Vercel
 - **Live Demo:** [InstaVibe](https://insta-c03iy21pc-deekshashettyyys-projects.vercel.app/) 
 - Use environment variables for sensitive credentials.
 
