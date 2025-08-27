@@ -3,6 +3,9 @@ node_modules/
 
 uploadsFolder/
 
+# Environment files
+.env
+
 # Ignore all dist or build folders
 dist/
 build/
@@ -15,9 +18,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
-# Environment files
-.env
 
 # Editor directories and files
 .vscode/*

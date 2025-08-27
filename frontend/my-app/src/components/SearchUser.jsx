@@ -15,7 +15,7 @@ function SearchUser()
             return;
         }
 
-        let url = `http://localhost:3000/show?username=${username}`;
+        let url = `https://instavibe-2j3l.onrender.com/show?username=${username}`;
 
         axios.get(url)
         .then((response)=>{

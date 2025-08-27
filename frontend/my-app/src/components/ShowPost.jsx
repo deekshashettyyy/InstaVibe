@@ -15,7 +15,7 @@ function ShowPost(props)
 
     const fetchFiles = ()=>{
 
-        let url = "http://localhost:3000/show";
+        let url = "https://instavibe-2j3l.onrender.com/show";
 
         axios.get(url)
         .then((response)=> setFiles(response.data))
@@ -29,8 +29,8 @@ function ShowPost(props)
     }
 
     const handleDelete = (id)=>{
-        let url = `http://localhost:3000/delete/${id}`;
-
+        
+        let url = `https://instavibe-2j3l.onrender.com/delete/${id}`;
 
         axios.delete(url)
         .then( ()=> fetchFiles())

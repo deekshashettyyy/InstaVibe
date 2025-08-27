@@ -58,7 +58,7 @@ function Click({upload, close})
         formData.append("username", username);
         formData.append("caption", caption);
 
-        let url = "http://localhost:3000/upload";
+         let url = "https://instavibe-2j3l.onrender.com/upload";
 
         try{
             await axios.post(url , formData , {
